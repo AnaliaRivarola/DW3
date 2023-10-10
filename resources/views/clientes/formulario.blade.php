@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Formulario de Creación de Cliente</div>
+                    <div style="background-color:rgb(4, 141, 141);" class="card-header">Formulario de Creación de Cliente</div>
                     
                     <div class="card-body">
                       <form method="POST" action="/crear">

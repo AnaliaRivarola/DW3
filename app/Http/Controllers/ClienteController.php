@@ -57,7 +57,24 @@ public function formulario(){
     return redirect()->route('index');
     }
 
+    public function ver($id){
+        $clientes=Cliente::find($id);
+        return view('clientes.ver',compact('clientes'));
 
-
+    }
+     
+    public function buscar(Request $request) {
+        $buscar = $request->input('buscar');
+        
+        // Realiza la búsqueda en la base de datos
+        $clientes = Cliente::where('nombre', 'like', "%$buscar%")->get();
+        
+        // Verifica si no se encontraron resultados
+        $vacio = $clientes->isEmpty();
+        
+        // Retorna la vista con los resultados o el mensaje de no encontrados
+        return view('clientes.index', compact('clientes', 'buscar', 'vacio'));
+    }
+    
 
 }

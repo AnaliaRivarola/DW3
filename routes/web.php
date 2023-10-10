@@ -26,9 +26,12 @@ Route::get('/home', [HomeController::class, 'index']);
 Route::get('pruebas/index',[HolaController::class,'index']); 
 
 Route::get('clientes/index',[ClienteController::class,'index'])->name('index');  
-Route::get('clientes/formulario',[ClienteController::class,'formulario']);  
+Route::get('clientes/formulario',[ClienteController::class,'formulario'])->name('nuevo');  
 Route::post('/crear', [ClienteController::class, 'crear'])->name('crear');
 Route::get('/eliminar/{id}',[ClienteController::class,'eliminar'])->name('eliminar');
 
 Route::get('/editar/{id}',[ClienteController::class,'editar'])->name('editar');
 Route::post('/actualizar/{id}',[ClienteController::class,'actualizar'])->name('actualizar');
+Route::get('/ver/{id}',[ClienteController::class,'ver'])->name('ver');
+
+Route::get('/clientes/buscar',[ClienteController::class,'buscar'])->name('buscar');
