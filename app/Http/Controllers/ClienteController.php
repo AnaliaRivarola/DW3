@@ -7,7 +7,7 @@ extends Controller {
 
 public function index(){ 
 //Obtener datos por ORM Eloquent    
-$clientes = Cliente::All();
+$clientes = Cliente::paginate(3);
 //Obtener datos por el metodo get
 //$clientes=DB::table('clientes')
 //->get();
@@ -65,14 +65,8 @@ public function formulario(){
      
     public function buscar(Request $request) {
         $buscar = $request->input('buscar');
-        
-        // Realiza la búsqueda en la base de datos
-        $clientes = Cliente::where('nombre', 'like', "%$buscar%")->get();
-        
-        // Verifica si no se encontraron resultados
+        $clientes = Cliente::where('nombre', 'like', "%$buscar%")->paginate(2);
         $vacio = $clientes->isEmpty();
-        
-        // Retorna la vista con los resultados o el mensaje de no encontrados
         return view('clientes.index', compact('clientes', 'buscar', 'vacio'));
     }
     

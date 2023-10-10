@@ -17,7 +17,18 @@
         margin-top: 10vh; /* Coloca el margen superior a la mitad de la altura de la ventana */
         transform: translateY(-50%); /* Corrige la posición vertical */
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        color: rgb(117, 117, 233);
+        text-decoration-line:underline;
+    
     }
+
+    .pagination {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    margin: 20px 0;
+}
+
 </style>
 
 
@@ -29,14 +40,14 @@
     @endif
     <h1>Listado de Clientes</h1>
     <div class="d-flex justify-content-between aling-items-center mb-3">
-        <a href="{{ route('nuevo') }}" class="btn btn-info" style="margin-bottom: 20px">
+        <a href="{{ route('nuevo') }}" class="btn" style="margin-bottom: 20px; background-color:rgb(192, 163, 219);">
             Nuevo </a>
         <form action="{{route('buscar')}}" method="GET" class="mb-12">
             <div class="input-group w-90">
                 <input type="text" name="buscar" class="form-control" placeholder=" Buscar por nombre"
                     aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit"> Buscar </button>
+                    <button class="btn btn-primary" style="background-color:rgb(192, 163, 219);" type="submit"> Buscar </button>
                 </div>
             </div>
     </div>
@@ -52,9 +63,9 @@
     </div>
     @else
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="text-align: center;">
         <thead>
-            <tr>
+            <tr style="color: rgb(173, 96, 245)">
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
@@ -63,7 +74,7 @@
                 <th>Correo</th>
                 <th>Fecha de Nacimiento</th>
                 <th>Estado</th>
-                <th>Accion</th>
+                <th>Acción</th>
             </tr>
         </thead>
         <tbody>
@@ -106,4 +117,5 @@
         </tbody>
     </table>
     @endif
+    {{$clientes->links()}}
 </div>
