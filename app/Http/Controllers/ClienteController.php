@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use DB;
-use Illuminate\Http\Request; use App\Models\Cliente; class ClienteController
-extends Controller {
+use Illuminate\Http\Request; 
+use App\Models\Cliente;
+use App\Models\Cargo; 
+class ClienteController extends Controller {
 
 public function index(){ 
 //Obtener datos por ORM Eloquent    
@@ -18,6 +20,22 @@ return view('clientes.index',compact('clientes')); }
 
 
 public function crear(Request $request){
+
+    $rules= [
+        'nombre'=> 'required | string',
+        'apellido'=> 'required',
+        'edad'=> 'required | integer',
+        'ci'=> 'required|unique:clientes,ci',
+        'correo'=> 'required|email',
+        'fecha_nac'=> 'required',
+        'estado'=> 'required'
+    ];
+
+    $mensaje = [
+        'required'=>'El :attribute campo requerido',
+        'fecha_nac.required'=> 'El campo fecha de nacimiento es requerido'
+    ];
+    $this->validate($request,$rules, $mensaje);
 Cliente::create([ 
            'nombre' => $request->input('nombre'),
             'apellido' => $request->input('apellido'),
@@ -31,7 +49,9 @@ Cliente::create([
     }
 
 public function formulario(){
-	return view('clientes.formulario');
+
+    $cargos = Cargo::pluck('nombre','id');
+    return view('clientes.formulario',compact('cargos'));
    }
     public function eliminar($id){
         $clientes =Cliente::find($id);
